@@ -39,8 +39,34 @@ public class NameManager : MonoBehaviour
         public int bestScore;
     }
 
-    public void SaveScore(int score)
+    public void SaveScore()
     {
+        SaveData data = new SaveData();
+        if (!string.IsNullOrEmpty(BestPlayer))
+        {
+            data.bestPlayer = BestPlayer;
+        } else
+        {
+            return;
+        }
+            
+        data.bestScore = Highscore;
 
+        string json = JsonUtility.ToJson(data);
+
+        File.WriteAllText(Application.persistentDataPath + "/highscore.json", json);
+    }
+
+    public void LoadScore()
+    {
+        string path = Application.persistentDataPath + "/highscore.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+            BestPlayer = data.bestPlayer;
+            Highscore = data.bestScore;
+        }
     }
 }

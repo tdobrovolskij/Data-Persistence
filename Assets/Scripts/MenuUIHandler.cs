@@ -11,38 +11,44 @@ using UnityEditor;
 public class MenuUIHandler : MonoBehaviour
 {
     public TMP_InputField inputField;
+    [SerializeField] TMP_Text highscoreText;
 
     // Start is called before the first frame update
     void Start()
     {
+        // if PlayerName is empty - we aren't coming from the main game
+        if (string.IsNullOrEmpty(NameManager.Instance.PlayerName))
+        {
+            NameManager.Instance.LoadScore();
+        }
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if ((!string.IsNullOrEmpty(NameManager.Instance.BestPlayer)) && (NameManager.Instance.Highscore > 0))
+            highscoreText.text = "Best Score : " + NameManager.Instance.BestPlayer + " : " + NameManager.Instance.Highscore;
     }
 
     public void StartNew()
     {
-        ProcessNameField();
-        SceneManager.LoadScene(1);
+        if (ProcessNameField())
+            SceneManager.LoadScene(1);
     }
 
-    public void ProcessNameField()
+    public bool ProcessNameField()
     {
         if (string.IsNullOrEmpty(inputField.text))
         {
-            // make it red or something
+            // make text red to nudge the player to enter his/her name
+            inputField.placeholder.color = new Color(0.9528f, 0.0674f, 0.0674f, 0.9019f);
+            return false;
         } else
         {
             NameManager.Instance.PlayerName = inputField.text;
+            return true;
         }
     }
 
     public void Exit()
     {
+        NameManager.Instance.SaveScore();
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
 #else

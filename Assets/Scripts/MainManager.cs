@@ -65,6 +65,8 @@ public class MainManager : MonoBehaviour
         {
             HighscoreText.text = "Best Score: " + NameManager.Instance.BestPlayer + " : " + NameManager.Instance.Highscore;
         }
+        if (Input.GetKey(KeyCode.Escape))
+            SceneManager.LoadScene(0);
     }
 
     void AddPoint(int point)

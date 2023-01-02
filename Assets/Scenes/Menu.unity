@@ -1171,6 +1171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 1651051514}
+  highscoreText: {fileID: 2002358071}
 --- !u!1 &1539726684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,7 +1547,7 @@ GameObject:
   - component: {fileID: 2002358072}
   - component: {fileID: 2002358071}
   m_Layer: 5
-  m_Name: Name Request Text
+  m_Name: Highscore Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1592,7 +1593,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Please enter your name to proceed...
+  m_text: 'Best Score : Name : 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
